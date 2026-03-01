@@ -41,8 +41,8 @@ public class ScreenshotPanel extends VBox {
         this.deviceManager = deviceManager;
         this.adbManager = adbManager;
         this.consolePanel = consolePanel;
-        loadSavedScreenshotDir();
         buildUI();
+        loadSavedScreenshotDir();
     }
     
     private void buildUI() {
@@ -173,10 +173,10 @@ public class ScreenshotPanel extends VBox {
         Properties props = loadProperties();
         String savedDir = props.getProperty(KEY_SCREENSHOT_DIR);
         if (savedDir != null && !savedDir.isEmpty() && Files.exists(Paths.get(savedDir))) {
-            outputDirField = new TextField(savedDir);
-            return;
+            if (outputDirField != null) {
+                outputDirField.setText(savedDir);
+            }
         }
-        outputDirField = new TextField();
     }
 
     /**

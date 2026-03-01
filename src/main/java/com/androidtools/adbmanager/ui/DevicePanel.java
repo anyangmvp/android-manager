@@ -152,6 +152,23 @@ public class DevicePanel extends VBox {
             container.getStyleClass().add("device-list-cell");
             container.setPadding(new Insets(8, 12, 8, 12));
             container.getChildren().addAll(topBox, idLabel);
+            
+            // 监听选中状态变化，直接设置样式
+            selectedProperty().addListener((obs, oldVal, newVal) -> {
+                updateSelectionStyle(newVal);
+            });
+        }
+        
+        private void updateSelectionStyle(boolean isSelected) {
+            if (isSelected) {
+                container.setStyle("-fx-background-color: #edf2f7; -fx-background-radius: 8px;");
+                nameLabel.setStyle("-fx-text-fill: #000000; -fx-font-weight: bold; -fx-font-size: 15px;");
+                idLabel.setStyle("-fx-text-fill: #2d3748; -fx-font-size: 12px;");
+            } else {
+                container.setStyle("-fx-background-color: white; -fx-background-radius: 8px;");
+                nameLabel.setStyle("-fx-text-fill: #2d3748; -fx-font-weight: bold; -fx-font-size: 14px;");
+                idLabel.setStyle("-fx-text-fill: #718096; -fx-font-size: 12px;");
+            }
         }
         
         @Override
@@ -164,6 +181,7 @@ public class DevicePanel extends VBox {
                 nameLabel.setText(item.getDeviceName());
                 idLabel.setText(item.getDeviceId());
                 statusIndicator.setActive(true);
+                updateSelectionStyle(isSelected());
                 setGraphic(container);
             }
         }

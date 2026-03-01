@@ -50,9 +50,14 @@
 }
 
 .list-view .list-cell:selected {
-    -fx-background-color: #e6fffa;
-    -fx-border-color: #4fd1c5;
+    -fx-background-color: #667eea;
+    -fx-border-color: #5a67d8;
     -fx-border-width: 2px;
+    -fx-text-fill: white;
+}
+
+.list-view .list-cell:selected .text {
+    -fx-fill: white;
 }
 
 /* 组合框 */
@@ -83,10 +88,31 @@
 
 .combo-box-popup .list-cell {
     -fx-padding: 10px;
+    -fx-background-color: white;
 }
 
 .combo-box-popup .list-cell:hover {
-    -fx-background-color: #f7fafc;
+    -fx-background-color: #667eea;
+}
+
+.combo-box-popup .list-cell:hover .text {
+    -fx-fill: white;
+}
+
+.combo-box-popup .list-cell:selected {
+    -fx-background-color: #667eea;
+}
+
+.combo-box-popup .list-cell:selected .text {
+    -fx-fill: white;
+}
+
+.combo-box .text {
+    -fx-fill: #2d3748;
+}
+
+.combo-box-popup .list-cell .text {
+    -fx-fill: #2d3748;
 }
 
 /* 文本字段 */
@@ -619,6 +645,20 @@
     -fx-background-color: white;
     -fx-background-radius: 8px;
     -fx-padding: 8 12 8 12;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 4, 0, 0, 2);
+}
+
+.device-list-cell:selected {
+    -fx-background-color: #edf2f7;
+}
+
+.device-list-cell:selected .name-label {
+    -fx-text-fill: #1a202c;
+    -fx-font-size: 15px;
+}
+
+.device-list-cell:selected .id-label {
+    -fx-text-fill: #2d3748;
 }
 
 .device-list-cell .name-label {
@@ -1037,3 +1077,190 @@
     -fx-scale-x: 0.98;
     -fx-scale-y: 0.98;
 }
+
+/* 对话框样式 */
+.dialog-pane {
+    -fx-background-color: white;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #f7fafc;
+}
+
+.dialog-pane .button-bar .button {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-background-radius: 6px;
+    -fx-padding: 8 16 8 16;
+}
+
+.dialog-pane .button-bar .button:hover {
+    -fx-background-color: #3182ce;
+}
+
+.text-input-dialog .text-field {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-text-fill: #2d3748;
+}
+
+/* ==================== 屏幕投射面板样式 ==================== */
+.screen-mirror-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.screen-mirror-panel .title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.screen-mirror-panel .section-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.screen-mirror-panel .field-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+    -fx-min-width: 60;
+}
+
+.screen-mirror-panel .check-box {
+    -fx-text-fill: #4a5568;
+}
+
+.screen-mirror-panel .start-button {
+    -fx-background-color: linear-gradient(to right, #48bb78 0%, #38a169 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.screen-mirror-panel .start-button:hover {
+    -fx-background-color: linear-gradient(to right, #38a169 0%, #2f855a 100%);
+}
+
+.screen-mirror-panel .stop-button {
+    -fx-background-color: linear-gradient(to right, #f56565 0%, #e53e3e 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.screen-mirror-panel .stop-button:hover {
+    -fx-background-color: linear-gradient(to right, #e53e3e 0%, #c53030 100%);
+}
+
+.screen-mirror-panel .status-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 14px;
+}
+
+/* ==================== 文件管理面板样式 ==================== */
+.file-transfer-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 15;
+}
+
+.file-transfer-panel .title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.file-transfer-panel .section-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.file-transfer-panel .field-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.file-section-box {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 8px;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-min-height: 250;
+}
+
+.file-section-box .section-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.file-section-box .path-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #718096;
+    -fx-font-family: 'Consolas', monospace;
+}
+
+.file-transfer-panel .push-button {
+    -fx-background-color: linear-gradient(to right, #4299e1 0%, #3182ce 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .pull-button {
+    -fx-background-color: linear-gradient(to right, #48bb78 0%, #38a169 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .refresh-button {
+    -fx-background-color: #a0aec0;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .delete-button {
+    -fx-background-color: linear-gradient(to right, #f56565 0%, #e53e3e 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .new-folder-button {
+    -fx-background-color: linear-gradient(to right, #ed8936 0%, #dd6b20 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .rename-button {
+    -fx-background-color: linear-gradient(to right, #805ad5 0%, #6b46c1 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.file-transfer-panel .status-label {
+    -fx-text-fill: #718096;
+    -fx-font-size: 13px;
+}
+
+/* ==================== 通用样式类 ==================== */

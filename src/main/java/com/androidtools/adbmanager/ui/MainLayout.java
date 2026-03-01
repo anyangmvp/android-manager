@@ -22,6 +22,8 @@ public class MainLayout extends BorderPane {
     private GradlePanel gradlePanel;
     private ApkInstallPanel apkInstallPanel;
     private ScreenshotPanel screenshotPanel;
+    private ScreenMirrorPanel screenMirrorPanel;
+    private FileTransferPanel fileTransferPanel;
     private ConsolePanel consolePanel;
     
     public MainLayout(DeviceManager deviceManager, AdbManager adbManager) {
@@ -47,19 +49,21 @@ public class MainLayout extends BorderPane {
      * 创建顶部工具栏
      */
     private VBox createTopBar() {
-        VBox topBar = new VBox(10);
-        topBar.setPadding(new Insets(15, 20, 15, 20));
+        VBox topBar = new VBox(8);
+        topBar.setPadding(new Insets(12, 20, 12, 20));
         topBar.getStyleClass().add("top-bar");
         
-        // 标题
+        HBox titleRow = new HBox(10);
+        titleRow.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        
         Label title = new Label("ADB Manager");
         title.getStyleClass().add("title");
         
-        // 副标题
         Label subtitle = new Label("专业的 Android 设备管理工具");
         subtitle.getStyleClass().add("subtitle");
         
-        topBar.getChildren().addAll(title, subtitle);
+        titleRow.getChildren().addAll(title, subtitle);
+        topBar.getChildren().add(titleRow);
         return topBar;
     }
     
@@ -101,7 +105,17 @@ public class MainLayout extends BorderPane {
         Tab screenshotTab = new Tab("截屏功能", screenshotPanel);
         screenshotTab.setClosable(false);
         
-        tabPane.getTabs().addAll(gradleTab, apkTab, screenshotTab);
+        // 屏幕投射标签页
+        screenMirrorPanel = new ScreenMirrorPanel(deviceManager, adbManager, consolePanel);
+        Tab mirrorTab = new Tab("屏幕投射", screenMirrorPanel);
+        mirrorTab.setClosable(false);
+        
+        // 文件管理标签页
+        fileTransferPanel = new FileTransferPanel(deviceManager, adbManager, consolePanel);
+        Tab fileTab = new Tab("文件管理", fileTransferPanel);
+        fileTab.setClosable(false);
+        
+        tabPane.getTabs().addAll(gradleTab, apkTab, screenshotTab, mirrorTab, fileTab);
         
         functionArea.getChildren().addAll(tabPane, consolePanel);
         
