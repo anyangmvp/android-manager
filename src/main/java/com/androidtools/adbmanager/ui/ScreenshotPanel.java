@@ -46,13 +46,11 @@ public class ScreenshotPanel extends VBox {
     }
     
     private void buildUI() {
-        setSpacing(20);
-        setPadding(new Insets(20));
-        setStyle("-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+        getStyleClass().add("screenshot-panel");
         
         // 标题
         Label titleLabel = new Label("截屏功能");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
+        titleLabel.getStyleClass().add("title-label");
         
         // 输出目录设置
         VBox dirBox = createDirSection();
@@ -63,12 +61,12 @@ public class ScreenshotPanel extends VBox {
         // 截屏按钮
         screenshotButton = new Button("开始截屏");
         screenshotButton.setPrefHeight(50);
-        screenshotButton.setStyle("-fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);");
+        screenshotButton.getStyleClass().add("screenshot-button");
         screenshotButton.setOnAction(e -> takeScreenshot());
         
         // 状态标签
         statusLabel = new Label("就绪");
-        statusLabel.setStyle("-fx-text-fill: #718096;");
+        statusLabel.getStyleClass().add("status-label");
         
         getChildren().addAll(titleLabel, dirBox, nameBox, screenshotButton, statusLabel);
     }
@@ -77,7 +75,7 @@ public class ScreenshotPanel extends VBox {
         VBox container = new VBox(10);
         
         Label sectionLabel = new Label("输出目录：");
-        sectionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        sectionLabel.getStyleClass().add("section-label");
         
         HBox dirBox = new HBox(10);
         dirBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
@@ -86,10 +84,10 @@ public class ScreenshotPanel extends VBox {
         outputDirField.setPromptText("选择截屏保存目录");
         outputDirField.setPrefWidth(500);
         outputDirField.setEditable(false);
-        outputDirField.setStyle("-fx-background-color: #f7fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px;");
+        outputDirField.getStyleClass().add("text-field");
         
         browseDirButton = new Button("浏览...");
-        browseDirButton.setStyle("-fx-background-color: #4299e1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;");
+        browseDirButton.getStyleClass().add("browse-button");
         browseDirButton.setOnAction(e -> browseOutputDir());
         
         dirBox.getChildren().addAll(outputDirField, browseDirButton);
@@ -102,30 +100,30 @@ public class ScreenshotPanel extends VBox {
         VBox container = new VBox(10);
         
         Label sectionLabel = new Label("文件名设置：");
-        sectionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        sectionLabel.getStyleClass().add("section-label");
         
         GridPane nameGrid = new GridPane();
         nameGrid.setHgap(15);
         nameGrid.setVgap(10);
         
         Label prefixLabel = new Label("文件名前缀：");
-        prefixLabel.setStyle("-fx-text-fill: #718096;");
+        prefixLabel.getStyleClass().add("section-label");
         
         prefixField = new TextField("Screenshot_");
         prefixField.setPromptText("例如：Screenshot_");
         prefixField.setPrefWidth(200);
-        prefixField.setStyle("-fx-background-color: #f7fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px;");
+        prefixField.getStyleClass().add("text-field");
         
         Label suffixLabel = new Label("文件名后缀：");
-        suffixLabel.setStyle("-fx-text-fill: #718096;");
+        suffixLabel.getStyleClass().add("section-label");
         
         suffixField = new TextField("Home");
         suffixField.setPromptText("例如：Home");
         suffixField.setPrefWidth(200);
-        suffixField.setStyle("-fx-background-color: #f7fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px;");
+        suffixField.getStyleClass().add("text-field");
         
         Label hintLabel = new Label("最终文件名格式：前缀 + 后缀 + 时间戳.png");
-        hintLabel.setStyle("-fx-text-fill: #a0aec0; -fx-font-size: 12px; -fx-font-style: italic;");
+        hintLabel.getStyleClass().add("hint-label");
         GridPane.setConstraints(hintLabel, 0, 2, 2, 1);
         
         nameGrid.add(prefixLabel, 0, 0);
@@ -215,7 +213,8 @@ public class ScreenshotPanel extends VBox {
         if (deviceManager.getSelectedDevice() == null) {
             consolePanel.appendLog("[错误] 请先选择设备");
             statusLabel.setText("请先选择设备");
-            statusLabel.setStyle("-fx-text-fill: #f56565; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-info");
+            statusLabel.getStyleClass().add("status-label-error");
             return;
         }
         
@@ -224,7 +223,8 @@ public class ScreenshotPanel extends VBox {
         if (outputDir == null || outputDir.isEmpty()) {
             consolePanel.appendLog("[错误] 请先选择输出目录");
             statusLabel.setText("请先选择输出目录");
-            statusLabel.setStyle("-fx-text-fill: #f56565; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-info");
+            statusLabel.getStyleClass().add("status-label-error");
             return;
         }
         
@@ -243,7 +243,8 @@ public class ScreenshotPanel extends VBox {
         consolePanel.appendLog("----------------------------------------");
         
         statusLabel.setText("正在截屏...");
-        statusLabel.setStyle("-fx-text-fill: #667eea; -fx-font-weight: bold;");
+        statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-info");
+        statusLabel.getStyleClass().add("status-label-info");
         
         // 执行截屏
         boolean success = adbManager.takeScreenshot(outputPath);
@@ -252,11 +253,13 @@ public class ScreenshotPanel extends VBox {
             consolePanel.appendLog("[成功] 截屏已保存：" + fileName);
             consolePanel.appendLog("完整路径：" + outputPath);
             statusLabel.setText("截屏成功：" + fileName);
-            statusLabel.setStyle("-fx-text-fill: #48bb78; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-info");
+            statusLabel.getStyleClass().add("status-label-success");
         } else {
             consolePanel.appendLog("[失败] 截屏操作失败");
             statusLabel.setText("截屏失败");
-            statusLabel.setStyle("-fx-text-fill: #f56565; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-info");
+            statusLabel.getStyleClass().add("status-label-error");
         }
     }
     

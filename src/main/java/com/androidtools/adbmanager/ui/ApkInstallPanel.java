@@ -51,13 +51,11 @@ public class ApkInstallPanel extends VBox {
     }
     
     private void buildUI() {
-        setSpacing(20);
-        setPadding(new Insets(20));
-        setStyle("-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+        getStyleClass().add("apk-install-panel");
         
         // 标题
         Label titleLabel = new Label("APK 安装");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
+        titleLabel.getStyleClass().add("title-label");
         
         // 从 Gradle 项目选择 APK
         VBox projectApkBox = createProjectApkSection();
@@ -67,7 +65,7 @@ public class ApkInstallPanel extends VBox {
         
         // 状态标签
         statusLabel = new Label("就绪");
-        statusLabel.setStyle("-fx-text-fill: #718096;");
+        statusLabel.getStyleClass().add("status-label");
         
         getChildren().addAll(titleLabel, projectApkBox, new Separator(), directApkBox, statusLabel);
     }
@@ -76,14 +74,14 @@ public class ApkInstallPanel extends VBox {
         VBox container = new VBox(15);
         
         Label sectionLabel = new Label("从项目选择 APK：");
-        sectionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        sectionLabel.getStyleClass().add("section-label");
         
         HBox apkSelectBox = new HBox(10);
         apkSelectBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         
         apkComboBox = new ComboBox<>();
         apkComboBox.setPrefWidth(500);
-        apkComboBox.setStyle("-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px; -fx-text-fill: #2d3748;");
+        apkComboBox.getStyleClass().add("combo-box");
         apkComboBox.setCellFactory(listView -> {
             ListCell<ApkInfo> cell = new ListCell<>() {
                 @Override
@@ -91,10 +89,10 @@ public class ApkInstallPanel extends VBox {
                     super.updateItem(item, empty);
                     if (empty || item == null) {
                         setText(null);
-                        setStyle("-fx-background-color: white; -fx-text-fill: #2d3748;");
+                        getStyleClass().addAll("apk-list-cell");
                     } else {
                         setText(item.getFileName());
-                        setStyle("-fx-background-color: white; -fx-text-fill: #2d3748;");
+                        getStyleClass().addAll("apk-list-cell");
                     }
                 }
             };
@@ -106,16 +104,16 @@ public class ApkInstallPanel extends VBox {
                 super.updateItem(item, empty);
                 if (empty || item == null) {
                     setText(null);
-                    setStyle("-fx-background-color: white; -fx-text-fill: #2d3748;");
+                    getStyleClass().addAll("apk-list-cell");
                 } else {
                     setText(item.getFileName());
-                    setStyle("-fx-background-color: white; -fx-text-fill: #2d3748;");
+                    getStyleClass().addAll("apk-list-cell");
                 }
             }
         });
         
         refreshButton = new Button("刷新 APK 列表");
-        refreshButton.setStyle("-fx-background-color: #4299e1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;");
+        refreshButton.getStyleClass().add("refresh-button");
         refreshButton.setOnAction(e -> refreshApkList());
         
         apkSelectBox.getChildren().addAll(apkComboBox, refreshButton);
@@ -123,7 +121,7 @@ public class ApkInstallPanel extends VBox {
         // 安装按钮
         installButton = new Button("安装选中 APK");
         installButton.setPrefHeight(45);
-        installButton.setStyle("-fx-background-color: #48bb78; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);");
+        installButton.getStyleClass().addAll("install-button", "install-button-green");
         installButton.setOnAction(e -> installSelectedApk());
         
         container.getChildren().addAll(sectionLabel, apkSelectBox, installButton);
@@ -134,7 +132,7 @@ public class ApkInstallPanel extends VBox {
         VBox container = new VBox(15);
         
         Label sectionLabel = new Label("直接选择 APK 文件：");
-        sectionLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        sectionLabel.getStyleClass().add("section-label");
         
         HBox fileSelectBox = new HBox(10);
         fileSelectBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
@@ -143,10 +141,10 @@ public class ApkInstallPanel extends VBox {
         apkPathField.setPromptText("选择 APK 文件路径");
         apkPathField.setPrefWidth(500);
         apkPathField.setEditable(false);
-        apkPathField.setStyle("-fx-background-color: #f7fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px;");
+        apkPathField.getStyleClass().add("text-field");
         
         browseButton = new Button("浏览...");
-        browseButton.setStyle("-fx-background-color: #ed8936; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;");
+        browseButton.getStyleClass().add("browse-button-orange");
         browseButton.setOnAction(e -> browseApkFile());
         
         fileSelectBox.getChildren().addAll(apkPathField, browseButton);
@@ -154,7 +152,7 @@ public class ApkInstallPanel extends VBox {
         // 安装按钮
         Button installDirectButton = new Button("安装此 APK");
         installDirectButton.setPrefHeight(45);
-        installDirectButton.setStyle("-fx-background-color: #f56565; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 15px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);");
+        installDirectButton.getStyleClass().addAll("install-button", "install-button-red");
         installDirectButton.setOnAction(e -> installDirectApk());
         
         container.getChildren().addAll(sectionLabel, fileSelectBox, installDirectButton);
@@ -166,7 +164,8 @@ public class ApkInstallPanel extends VBox {
         if (gradleManager == null || gradleManager.getProjectDir() == null) {
             consolePanel.appendLog("[错误] 请先在 Gradle 构建面板中选择项目目录");
             statusLabel.setText("请先在 Gradle 构建面板中选择项目目录");
-            statusLabel.setStyle("-fx-text-fill: #ed8936; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-warning");
+            statusLabel.getStyleClass().add("status-label-warning");
             return;
         }
         
@@ -180,7 +179,8 @@ public class ApkInstallPanel extends VBox {
         if (apks.isEmpty()) {
             consolePanel.appendLog("[未找到] 未发现 APK 文件，请先构建项目");
             statusLabel.setText("未找到 APK 文件，请先构建项目");
-            statusLabel.setStyle("-fx-text-fill: #ed8936; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-warning");
+            statusLabel.getStyleClass().add("status-label-warning");
             return;
         }
         
@@ -194,7 +194,8 @@ public class ApkInstallPanel extends VBox {
         apkComboBox.getSelectionModel().selectFirst();
         
         statusLabel.setText("找到 " + apks.size() + " 个 APK 文件");
-        statusLabel.setStyle("-fx-text-fill: #48bb78; -fx-font-weight: bold;");
+        statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-warning");
+        statusLabel.getStyleClass().add("status-label-success");
     }
     
     /**
@@ -351,13 +352,15 @@ public class ApkInstallPanel extends VBox {
         if (success) {
             consolePanel.appendLog("[成功] APK 安装完成");
             statusLabel.setText("安装成功！");
-            statusLabel.setStyle("-fx-text-fill: #48bb78; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-warning");
+            statusLabel.getStyleClass().add("status-label-success");
         } else {
             consolePanel.appendLog("[失败] APK 安装失败, ");
             consolePanel.appendLog("可能原因：证书签名问题、设备连接断开等");
             // 检查是否是证书问题
             statusLabel.setText("安装失败，可能是证书问题");
-            statusLabel.setStyle("-fx-text-fill: #f56565; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error", "status-label-warning");
+            statusLabel.getStyleClass().add("status-label-error");
         }
     }
 }

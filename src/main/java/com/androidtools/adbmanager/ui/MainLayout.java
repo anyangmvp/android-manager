@@ -28,7 +28,7 @@ public class MainLayout extends BorderPane {
         this.deviceManager = deviceManager;
         this.adbManager = adbManager;
         
-        setStyle("-fx-background-color: #f5f7fa;");
+        getStyleClass().add("main-layout");
         
         // 创建顶部工具栏
         VBox top = createTopBar();
@@ -49,15 +49,15 @@ public class MainLayout extends BorderPane {
     private VBox createTopBar() {
         VBox topBar = new VBox(10);
         topBar.setPadding(new Insets(15, 20, 15, 20));
-        topBar.setStyle("-fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%);");
+        topBar.getStyleClass().add("top-bar");
         
         // 标题
         Label title = new Label("ADB Manager");
-        title.setStyle("-fx-text-fill: white; -fx-font-size: 28px; -fx-font-weight: bold;");
+        title.getStyleClass().add("title");
         
         // 副标题
         Label subtitle = new Label("专业的 Android 设备管理工具");
-        subtitle.setStyle("-fx-text-fill: rgba(255,255,255,0.8); -fx-font-size: 14px;");
+        subtitle.getStyleClass().add("subtitle");
         
         topBar.getChildren().addAll(title, subtitle);
         return topBar;
@@ -115,7 +115,7 @@ public class MainLayout extends BorderPane {
     private HBox createStatusBar() {
         HBox statusBar = new HBox(20);
         statusBar.setPadding(new Insets(12, 20, 12, 20));
-        statusBar.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #ffffff 0%, #f7fafc 100%); -fx-border-color: #e1e5eb; -fx-border-width: 1 0 0 0; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 1);");
+        statusBar.getStyleClass().add("status-bar");
         
         // 左侧区域：设备状态 + 刷新设备按钮（占 2/3）
         HBox leftArea = new HBox(15);
@@ -123,48 +123,16 @@ public class MainLayout extends BorderPane {
         
         // 设备状态
         Label deviceStatus = new Label("设备状态：");
-        deviceStatus.setStyle("-fx-text-fill: #718096; -fx-font-weight: bold; -fx-font-size: 13px;");
+        deviceStatus.getStyleClass().add("label");
         
         Label deviceCount = new Label();
         deviceCount.textProperty().bind(deviceManager.statusMessageProperty());
-        deviceCount.setStyle("-fx-text-fill: #667eea; -fx-font-size: 13px; -fx-font-weight: bold;");
+        deviceCount.getStyleClass().add("device-count");
         
         // 刷新设备按钮 - 缩小版本
         Button refreshDeviceButton = new Button("🔄 刷新");
-        refreshDeviceButton.setStyle(
-            "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%); " +
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 12px; " +
-            "-fx-background-radius: 15px; " +
-            "-fx-cursor: hand; " +
-            "-fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 4, 0, 0, 1); " +
-            "-fx-padding: 5px 12px;"
-        );
-        refreshDeviceButton.setOnMouseEntered(e -> 
-            refreshDeviceButton.setStyle(
-                "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #5a67d8 0%, #6b46c1 100%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 12px; " +
-                "-fx-background-radius: 15px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(102,126,234,0.6), 6, 0, 0, 2); " +
-                "-fx-padding: 5px 12px;"
-            )
-        );
-        refreshDeviceButton.setOnMouseExited(e -> 
-            refreshDeviceButton.setStyle(
-                "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 12px; " +
-                "-fx-background-radius: 15px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 4, 0, 0, 1); " +
-                "-fx-padding: 5px 12px;"
-            )
-        );
+        refreshDeviceButton.getStyleClass().addAll("status-bar-button", "button-hover-scale");
+        
         refreshDeviceButton.setOnAction(e -> deviceManager.scanDevices());
         
         leftArea.getChildren().addAll(deviceStatus, deviceCount, refreshDeviceButton);
@@ -173,7 +141,7 @@ public class MainLayout extends BorderPane {
         Region separator = new Region();
         separator.setPrefWidth(1);
         separator.setPrefHeight(24);
-        separator.setStyle("-fx-background-color: #e2e8f0; -fx-background-radius: 2px;");
+        separator.getStyleClass().add("status-bar-separator");
         
         // 右侧区域：重启 ADB 按钮 + 连接指示器（占 1/3）
         HBox rightArea = new HBox(12);
@@ -182,40 +150,7 @@ public class MainLayout extends BorderPane {
         
         // 重启 ADB 按钮
         Button killAdbButton = new Button("🔄 重启 ADB");
-        killAdbButton.setStyle(
-            "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #f56565 0%, #e53e3e 100%); " +
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 12px; " +
-            "-fx-background-radius: 15px; " +
-            "-fx-cursor: hand; " +
-            "-fx-effect: dropshadow(gaussian, rgba(245,101,101,0.4), 4, 0, 0, 1); " +
-            "-fx-padding: 5px 12px;"
-        );
-        killAdbButton.setOnMouseEntered(e -> 
-            killAdbButton.setStyle(
-                "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #e53e3e 0%, #c53030 100%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 12px; " +
-                "-fx-background-radius: 15px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(245,101,101,0.6), 6, 0, 0, 2); " +
-                "-fx-padding: 5px 12px;"
-            )
-        );
-        killAdbButton.setOnMouseExited(e -> 
-            killAdbButton.setStyle(
-                "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #f56565 0%, #e53e3e 100%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 12px; " +
-                "-fx-background-radius: 15px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(245,101,101,0.4), 4, 0, 0, 1); " +
-                "-fx-padding: 5px 12px;"
-            )
-        );
+        killAdbButton.getStyleClass().addAll("status-bar-button-danger", "button-hover-scale");
         killAdbButton.setOnAction(e -> killAdbProcess());
         
         // 连接指示器

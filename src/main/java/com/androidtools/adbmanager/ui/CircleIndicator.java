@@ -25,12 +25,14 @@ public class CircleIndicator extends Circle {
     
     private void updateColor() {
         if (active) {
-            setFill(Color.web("#48bb78"));
-            setStroke(Color.web("#2f855a"));
+            setFill(javafx.scene.paint.Color.web("#48bb78"));
+            setStroke(javafx.scene.paint.Color.web("#2f855a"));
         } else {
-            setFill(Color.web("#fc8181"));
-            setStroke(Color.web("#c53030"));
+            setFill(javafx.scene.paint.Color.web("#fc8181"));
+            setStroke(javafx.scene.paint.Color.web("#c53030"));
         }
         setStrokeWidth(2);
+        getStyleClass().clear();
+        getStyleClass().add(active ? "circle-indicator" : "circle-indicator-inactive");
     }
 }

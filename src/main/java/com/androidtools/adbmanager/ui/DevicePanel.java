@@ -24,19 +24,16 @@ public class DevicePanel extends VBox {
     }
     
     private void buildUI() {
-        setSpacing(20);
-        setPadding(new Insets(25, 25, 25, 25));
-        setPrefWidth(300);
-        setStyle("-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+        getStyleClass().add("device-panel");
         
         // 标题区域 - 左对齐，带下划线
         VBox titleSection = new VBox(8);
         Label titleLabel = new Label("设备管理");
-        titleLabel.setStyle("-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);");
+        titleLabel.getStyleClass().add("title-label");
         
         Region separator = new Region();
         separator.setPrefHeight(3);
-        separator.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%); -fx-background-radius: 2px;");
+        separator.getStyleClass().add("title-separator");
         
         titleSection.getChildren().addAll(titleLabel, separator);
         
@@ -44,24 +41,20 @@ public class DevicePanel extends VBox {
         scanButton = new Button("刷新设备");
         scanButton.setPrefWidth(Double.MAX_VALUE);
         scanButton.setPrefHeight(50);
-        String scanNormalStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 6, 0, 0, 2);";
-        String scanHoverStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #5a6fd6 0%, #694190 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.5), 8, 0, 0, 3);";
-        scanButton.setStyle(scanNormalStyle);
-        scanButton.setOnMouseEntered(e -> scanButton.setStyle(scanHoverStyle));
-        scanButton.setOnMouseExited(e -> scanButton.setStyle(scanNormalStyle));
+        scanButton.getStyleClass().addAll("scan-button", "button-hover-scale");
         scanButton.setOnAction(e -> scanDevices());
         
         // 设备列表区域
         VBox listSection = new VBox(10);
-        listSection.setStyle("-fx-background-color: #f7fafc; -fx-background-radius: 10px; -fx-padding: 15px;");
+        listSection.getStyleClass().add("list-section");
         
         Label listTitleLabel = new Label("设备列表");
-        listTitleLabel.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-text-fill: #718096;");
+        listTitleLabel.getStyleClass().add("list-title");
         
         deviceListView = new ListView<>();
         deviceListView.setItems(deviceManager.getDevices());
         deviceListView.setCellFactory(param -> new DeviceListCell());
-        deviceListView.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-background-radius: 8px;");
+        deviceListView.getStyleClass().add("device-list");
         deviceListView.setPrefHeight(350);
         VBox.setVgrow(deviceListView, Priority.ALWAYS);
         
@@ -78,22 +71,14 @@ public class DevicePanel extends VBox {
         selectButton.setDisable(true);
         selectButton.setPrefWidth(Double.MAX_VALUE);
         selectButton.setPrefHeight(50);
-        String selectNormalStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #48bb78 0%, #38a169 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(72,187,120,0.4), 6, 0, 0, 2);";
-        String selectHoverStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #41a86a 0%, #32915e 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(72,187,120,0.5), 8, 0, 0, 3);";
-        selectButton.setStyle(selectNormalStyle);
-        selectButton.setOnMouseEntered(e -> selectButton.setStyle(selectHoverStyle));
-        selectButton.setOnMouseExited(e -> selectButton.setStyle(selectNormalStyle));
+        selectButton.getStyleClass().addAll("action-button", "select-button", "button-hover-scale");
         selectButton.setOnAction(e -> selectDevice());
         
         disconnectButton = new Button("断开设备");
         disconnectButton.setDisable(true);
         disconnectButton.setPrefWidth(Double.MAX_VALUE);
         disconnectButton.setPrefHeight(50);
-        String disconnectNormalStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #f56565 0%, #e53e3e 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.4), 6, 0, 0, 2);";
-        String disconnectHoverStyle = "-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #dd5a5a 0%, #d03737 100%); -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-background-radius: 10px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.5), 8, 0, 0, 3);";
-        disconnectButton.setStyle(disconnectNormalStyle);
-        disconnectButton.setOnMouseEntered(e -> disconnectButton.setStyle(disconnectHoverStyle));
-        disconnectButton.setOnMouseExited(e -> disconnectButton.setStyle(disconnectNormalStyle));
+        disconnectButton.getStyleClass().addAll("action-button", "disconnect-button", "button-hover-scale");
         disconnectButton.setOnAction(e -> disconnectDevice());
         
         buttonBox.getChildren().addAll(selectButton, disconnectButton);
@@ -158,15 +143,15 @@ public class DevicePanel extends VBox {
         private final CircleIndicator statusIndicator = new CircleIndicator();
         
         public DeviceListCell() {
-            nameLabel.setStyle("-fx-font-weight: bold; -fx-font-size: 14px; -fx-text-fill: #2d3748;");
-            idLabel.setStyle("-fx-font-size: 12px; -fx-text-fill: #718096;");
+            nameLabel.getStyleClass().add("name-label");
+            idLabel.getStyleClass().add("id-label");
             
             HBox topBox = new HBox(10, statusIndicator, nameLabel);
             topBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
             
-            container.getChildren().addAll(topBox, idLabel);
+            container.getStyleClass().add("device-list-cell");
             container.setPadding(new Insets(8, 12, 8, 12));
-            container.setStyle("-fx-background-color: white; -fx-background-radius: 8px;");
+            container.getChildren().addAll(topBox, idLabel);
         }
         
         @Override

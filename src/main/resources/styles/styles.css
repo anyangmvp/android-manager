@@ -417,3 +417,623 @@
     -fx-scale-x: 0.95;
     -fx-scale-y: 0.95;
 }
+
+/* ==================== 主界面布局样式 ==================== */
+/* 顶部工具栏 */
+.top-bar {
+    -fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    -fx-padding: 15 20 15 20;
+    -fx-spacing: 10;
+}
+
+.top-bar .title {
+    -fx-text-fill: white;
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+}
+
+.top-bar .subtitle {
+    -fx-text-fill: rgba(255,255,255,0.8);
+    -fx-font-size: 14px;
+}
+
+/* 底部状态栏 */
+.status-bar {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #ffffff 0%, #f7fafc 100%);
+    -fx-border-color: #e1e5eb;
+    -fx-border-width: 1 0 0 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 1);
+    -fx-padding: 12 20 12 20;
+    -fx-spacing: 20;
+}
+
+.status-bar .label {
+    -fx-text-fill: #718096;
+    -fx-font-weight: bold;
+    -fx-font-size: 13px;
+}
+
+.status-bar .device-count {
+    -fx-text-fill: #667eea;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+/* 状态栏按钮 */
+.status-bar-button {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 4, 0, 0, 1);
+    -fx-padding: 5px 12px;
+}
+
+.status-bar-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #5a67d8 0%, #6b46c1 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.6), 6, 0, 0, 2);
+    -fx-padding: 5px 12px;
+}
+
+.status-bar-button-danger {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #f56565 0%, #e53e3e 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.4), 4, 0, 0, 1);
+    -fx-padding: 5px 12px;
+}
+
+.status-bar-button-danger:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #e53e3e 0%, #c53030 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.6), 6, 0, 0, 2);
+    -fx-padding: 5px 12px;
+}
+
+/* 分隔线 */
+.status-bar-separator {
+    -fx-background-color: #e2e8f0;
+    -fx-background-radius: 2px;
+    -fx-pref-width: 1;
+    -fx-pref-height: 24;
+}
+
+/* ==================== 设备面板样式 ==================== */
+.device-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 25;
+    -fx-spacing: 20;
+    -fx-pref-width: 300;
+}
+
+.device-panel .title-label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+}
+
+.device-panel .title-separator {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+    -fx-background-radius: 2px;
+    -fx-pref-height: 3;
+}
+
+.device-panel .scan-button {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.4), 6, 0, 0, 2);
+    -fx-pref-width: double;
+    -fx-pref-height: 50;
+}
+
+.device-panel .scan-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #5a6fd6 0%, #694190 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(102,126,234,0.5), 8, 0, 0, 3);
+}
+
+.device-panel .list-section {
+    -fx-background-color: #f7fafc;
+    -fx-background-radius: 10px;
+    -fx-padding: 15;
+}
+
+.device-panel .list-title {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #718096;
+}
+
+.device-panel .device-list {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 8px;
+    -fx-pref-height: 350;
+}
+
+.device-panel .action-button {
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-pref-width: double;
+    -fx-pref-height: 50;
+}
+
+.device-panel .select-button {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #48bb78 0%, #38a169 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(72,187,120,0.4), 6, 0, 0, 2);
+}
+
+.device-panel .select-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #41a86a 0%, #32915e 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(72,187,120,0.5), 8, 0, 0, 3);
+}
+
+.device-panel .disconnect-button {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #f56565 0%, #e53e3e 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.4), 6, 0, 0, 2);
+}
+
+.device-panel .disconnect-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #dd5a5a 0%, #d03737 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(245,101,101,0.5), 8, 0, 0, 3);
+}
+
+/* 设备列表单元格 */
+.device-list-cell {
+    -fx-background-color: white;
+    -fx-background-radius: 8px;
+    -fx-padding: 8 12 8 12;
+}
+
+.device-list-cell .name-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: #2d3748;
+}
+
+.device-list-cell .id-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: #718096;
+}
+
+/* ==================== Gradle 面板样式 ==================== */
+.gradle-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+.gradle-panel .title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.gradle-panel .dir-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.gradle-panel .project-dir-field {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+}
+
+.gradle-panel .browse-button {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.gradle-panel .action-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-pref-size: 150 50;
+}
+
+.gradle-panel .large-action-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-pref-width: 75;
+    -fx-pref-height: 115;
+}
+
+.gradle-panel .large-action-button:hover {
+    -fx-background-color: #5a6b7c;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);
+}
+
+.gradle-panel .status-label {
+    -fx-text-fill: #718096;
+    -fx-font-style: italic;
+}
+
+.gradle-panel .status-label-success {
+    -fx-text-fill: #48bb78;
+    -fx-font-weight: bold;
+}
+
+.gradle-panel .status-label-error {
+    -fx-text-fill: #f56565;
+    -fx-font-weight: bold;
+}
+
+/* 按钮颜色变体 */
+.gradle-button-orange {
+    -fx-background-color: #ed8936;
+}
+
+.gradle-button-orange:hover {
+    -fx-background-color: #dd6b2f;
+}
+
+.gradle-button-purple {
+    -fx-background-color: #9f7aea;
+}
+
+.gradle-button-purple:hover {
+    -fx-background-color: #805ad5;
+}
+
+.gradle-button-green {
+    -fx-background-color: #48bb78;
+}
+
+.gradle-button-green:hover {
+    -fx-background-color: #38a169;
+}
+
+.gradle-button-red {
+    -fx-background-color: #f56565;
+}
+
+.gradle-button-red:hover {
+    -fx-background-color: #e53e3e;
+}
+
+.gradle-button-gray {
+    -fx-background-color: #718096;
+}
+
+.gradle-button-gray:hover {
+    -fx-background-color: #4a5568;
+}
+
+/* ==================== APK 安装面板样式 ==================== */
+.apk-install-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+.apk-install-panel .title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.apk-install-panel .section-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.apk-install-panel .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+    -fx-text-fill: #2d3748;
+}
+
+.apk-install-panel .text-field {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+}
+
+.apk-install-panel .refresh-button {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.apk-install-panel .refresh-button:hover {
+    -fx-background-color: #3182ce;
+}
+
+.apk-install-panel .install-button {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-pref-height: 45;
+}
+
+.apk-install-panel .install-button-green {
+    -fx-background-color: #48bb78;
+}
+
+.apk-install-panel .install-button-green:hover {
+    -fx-background-color: #38a169;
+}
+
+.apk-install-panel .install-button-red {
+    -fx-background-color: #f56565;
+}
+
+.apk-install-panel .install-button-red:hover {
+    -fx-background-color: #e53e3e;
+}
+
+.apk-install-panel .browse-button-orange {
+    -fx-background-color: #ed8936;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.apk-install-panel .browse-button-orange:hover {
+    -fx-background-color: #dd6b2f;
+}
+
+.apk-install-panel .status-label {
+    -fx-text-fill: #718096;
+}
+
+.apk-install-panel .status-label-warning {
+    -fx-text-fill: #ed8936;
+    -fx-font-weight: bold;
+}
+
+.apk-install-panel .status-label-success {
+    -fx-text-fill: #48bb78;
+    -fx-font-weight: bold;
+}
+
+.apk-install-panel .status-label-error {
+    -fx-text-fill: #f56565;
+    -fx-font-weight: bold;
+}
+
+/* ComboBox 列表单元格 */
+.apk-list-cell {
+    -fx-background-color: white;
+    -fx-text-fill: #2d3748;
+}
+
+/* ==================== 截屏面板样式 ==================== */
+.screenshot-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 20;
+    -fx-spacing: 20;
+}
+
+.screenshot-panel .title-label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2d3748;
+}
+
+.screenshot-panel .section-label {
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a5568;
+}
+
+.screenshot-panel .text-field {
+    -fx-background-color: #f7fafc;
+    -fx-border-color: #e2e8f0;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 8px;
+}
+
+.screenshot-panel .browse-button {
+    -fx-background-color: #4299e1;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 8px;
+    -fx-cursor: hand;
+}
+
+.screenshot-panel .screenshot-button {
+    -fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);
+    -fx-pref-height: 50;
+}
+
+.screenshot-panel .screenshot-button:hover {
+    -fx-background-color: linear-gradient(to right, #5a6fd6 0%, #694190 100%);
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);
+    -fx-pref-height: 50;
+}
+
+.screenshot-panel .hint-label {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+}
+
+.screenshot-panel .status-label {
+    -fx-text-fill: #718096;
+}
+
+.screenshot-panel .status-label-success {
+    -fx-text-fill: #48bb78;
+    -fx-font-weight: bold;
+}
+
+.screenshot-panel .status-label-error {
+    -fx-text-fill: #f56565;
+    -fx-font-weight: bold;
+}
+
+.screenshot-panel .status-label-info {
+    -fx-text-fill: #667eea;
+    -fx-font-weight: bold;
+}
+
+/* ==================== 控制台面板样式 ==================== */
+.console-panel {
+    -fx-background-color: white;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+.console-panel .title-label {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+}
+
+.console-panel .title-separator {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);
+    -fx-background-radius: 1px;
+    -fx-pref-height: 2;
+}
+
+.console-panel .console-area {
+    -fx-background-color: #f7fafc;
+    -fx-text-fill: #2d3748;
+    -fx-font-family: 'Consolas', 'Monaco', monospace;
+    -fx-font-size: 12px;
+    -fx-background-radius: 6px;
+    -fx-border-color: transparent;
+    -fx-border-radius: 6px;
+    -fx-padding: 8px;
+}
+
+/* ==================== 圆形指示器样式 ==================== */
+.circle-indicator {
+    -fx-fill: #48bb78;
+    -fx-stroke: #2f855a;
+    -fx-stroke-width: 2;
+    -fx-radius: 8;
+}
+
+.circle-indicator-inactive {
+    -fx-fill: #fc8181;
+    -fx-stroke: #c53030;
+    -fx-stroke-width: 2;
+    -fx-radius: 8;
+}
+
+/* ==================== 通用样式类 ==================== */
+/* 只读文本字段 */
+.text-field-readonly {
+    -fx-background-color: #f7fafc;
+    -fx-opacity: 1;
+}
+
+/* 提示文本 */
+.hint-text {
+    -fx-text-fill: #a0aec0;
+    -fx-font-size: 12px;
+    -fx-font-style: italic;
+}
+
+/* 渐变背景 */
+.gradient-primary {
+    -fx-background-color: linear-gradient(to right, #667eea 0%, #764ba2 100%);
+}
+
+.gradient-success {
+    -fx-background-color: linear-gradient(to right, #48bb78 0%, #38a169 100%);
+}
+
+.gradient-danger {
+    -fx-background-color: linear-gradient(to right, #f56565 0%, #e53e3e 100%);
+}
+
+.gradient-warning {
+    -fx-background-color: linear-gradient(to right, #ed8936 0%, #dd6b2f 100%);
+}
+
+/* 按钮 hover 效果通用类 */
+.button-hover-scale {
+    -fx-transition: all 0.15s ease;
+}
+
+.button-hover-scale:pressed {
+    -fx-scale-x: 0.98;
+    -fx-scale-y: 0.98;
+}

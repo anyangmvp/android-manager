@@ -113,28 +113,26 @@ public class GradlePanel extends VBox {
     }
     
     private void buildUI() {
-        setSpacing(20);
-        setPadding(new Insets(20));
-        setStyle("-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+        getStyleClass().add("gradle-panel");
         
         // 标题
         Label titleLabel = new Label("Gradle 构建");
-        titleLabel.setStyle("-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #2d3748;");
+        titleLabel.getStyleClass().add("title-label");
         
         // 项目目录选择
         HBox dirBox = new HBox(10);
         dirBox.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         
         Label dirLabel = new Label("项目目录：");
-        dirLabel.setStyle("-fx-font-weight: bold; -fx-text-fill: #4a5568;");
+        dirLabel.getStyleClass().add("dir-label");
         
         projectDirField.setEditable(false);
         projectDirField.setPromptText("选择 Android 项目根目录");
         projectDirField.setPrefWidth(400);
-        projectDirField.setStyle("-fx-background-color: #f7fafc; -fx-border-color: #e2e8f0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 8px;");
+        projectDirField.getStyleClass().add("project-dir-field");
         
         browseButton = new Button("浏览...");
-        browseButton.setStyle("-fx-background-color: #4299e1; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8px; -fx-cursor: hand;");
+        browseButton.getStyleClass().add("browse-button");
         browseButton.setOnAction(e -> browseProjectDir());
         
         dirBox.getChildren().addAll(dirLabel, projectDirField, browseButton);
@@ -198,7 +196,7 @@ public class GradlePanel extends VBox {
         
         // 状态标签
         statusLabel = new Label("请先选择项目目录");
-        statusLabel.setStyle("-fx-text-fill: #718096; -fx-font-style: italic;");
+        statusLabel.getStyleClass().add("status-label");
         
         // 监听项目目录变化
         projectDirField.textProperty().addListener((obs, oldVal, newVal) -> {
@@ -210,15 +208,18 @@ public class GradlePanel extends VBox {
                     gradleManager.setProjectDir(newVal);
                     saveProjectDir(newVal); // 保存项目目录
                     statusLabel.setText("项目目录已设置：" + newVal);
-                    statusLabel.setStyle("-fx-text-fill: #48bb78; -fx-font-weight: bold;");
+                    statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error");
+                    statusLabel.getStyleClass().add("status-label-success");
                 } catch (Exception e) {
                     statusLabel.setText("无效的项目目录");
-                    statusLabel.setStyle("-fx-text-fill: #f56565;");
+                    statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error");
+                    statusLabel.getStyleClass().add("status-label-error");
                     updateButtonStates(false);
                 }
             } else {
                 statusLabel.setText("请先选择项目目录");
-                statusLabel.setStyle("-fx-text-fill: #718096; -fx-font-style: italic;");
+                statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error");
+                statusLabel.getStyleClass().add("status-label");
             }
         });
         
@@ -228,10 +229,12 @@ public class GradlePanel extends VBox {
         // 更新状态标签
         if (hasProjectDir) {
             statusLabel.setText("项目目录已设置：" + projectDirField.getText());
-            statusLabel.setStyle("-fx-text-fill: #48bb78; -fx-font-weight: bold;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error");
+            statusLabel.getStyleClass().add("status-label-success");
         } else {
             statusLabel.setText("请先选择项目目录");
-            statusLabel.setStyle("-fx-text-fill: #718096; -fx-font-style: italic;");
+            statusLabel.getStyleClass().removeAll("status-label", "status-label-success", "status-label-error");
+            statusLabel.getStyleClass().add("status-label");
         }
         
         getChildren().addAll(titleLabel, dirBox, buttonGrid, statusLabel);
@@ -457,42 +460,26 @@ public class GradlePanel extends VBox {
     private Button createActionButton(String text, String color) {
         Button button = new Button(text);
         button.setPrefSize(150, 50);
-        button.setStyle(String.format(
-            "-fx-background-color: %s; " +
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 14px; " +
-            "-fx-background-radius: 10px; " +
-            "-fx-cursor: hand; " +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);",
-            color
-        ));
+        button.getStyleClass().addAll("action-button", "button-hover-scale");
         
-        button.setOnMouseEntered(e -> 
-            button.setStyle(String.format(
-                "-fx-background-color: derive(%s, -10%%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 14px; " +
-                "-fx-background-radius: 10px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);",
-                color
-            ))
-        );
-        
-        button.setOnMouseExited(e -> 
-            button.setStyle(String.format(
-                "-fx-background-color: %s; " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 14px; " +
-                "-fx-background-radius: 10px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);",
-                color
-            ))
-        );
+        // 根据颜色添加不同的样式类
+        switch (color) {
+            case "#ed8936":
+                button.getStyleClass().add("gradle-button-orange");
+                break;
+            case "#9f7aea":
+                button.getStyleClass().add("gradle-button-purple");
+                break;
+            case "#48bb78":
+                button.getStyleClass().add("gradle-button-green");
+                break;
+            case "#f56565":
+                button.getStyleClass().add("gradle-button-red");
+                break;
+            default:
+                button.getStyleClass().add("gradle-button-gray");
+                break;
+        }
         
         return button;
     }
@@ -501,42 +488,12 @@ public class GradlePanel extends VBox {
         Button button = new Button(text);
         button.setPrefWidth(75);
         button.setPrefHeight(115); // 两行高度
-        button.setStyle(String.format(
-            "-fx-background-color: %s; " +
-            "-fx-text-fill: white; " +
-            "-fx-font-weight: bold; " +
-            "-fx-font-size: 16px; " +
-            "-fx-background-radius: 10px; " +
-            "-fx-cursor: hand; " +
-            "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);",
-            color
-        ));
+        button.getStyleClass().addAll("large-action-button", "button-hover-scale");
         
-        button.setOnMouseEntered(e -> 
-            button.setStyle(String.format(
-                "-fx-background-color: derive(%s, -10%%); " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 16px; " +
-                "-fx-background-radius: 10px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 6, 0, 0, 3);",
-                color
-            ))
-        );
-        
-        button.setOnMouseExited(e -> 
-            button.setStyle(String.format(
-                "-fx-background-color: %s; " +
-                "-fx-text-fill: white; " +
-                "-fx-font-weight: bold; " +
-                "-fx-font-size: 16px; " +
-                "-fx-background-radius: 10px; " +
-                "-fx-cursor: hand; " +
-                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 2);",
-                color
-            ))
-        );
+        // 根据颜色添加不同的样式类
+        if ("#718096".equals(color)) {
+            button.getStyleClass().add("gradle-button-gray");
+        }
         
         return button;
     }

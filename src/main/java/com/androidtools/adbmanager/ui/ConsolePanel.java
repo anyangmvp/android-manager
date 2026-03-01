@@ -20,18 +20,17 @@ public class ConsolePanel extends VBox {
     }
     
     private void buildUI() {
-        setSpacing(10);
-        setStyle("-fx-background-color: white; -fx-background-radius: 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 2);");
+        getStyleClass().add("console-panel");
         setPadding(new Insets(15));
         
         // 标题区域
         VBox titleSection = new VBox(6);
         Label titleLabel = new Label("控制台输出");
-        titleLabel.setStyle("-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%);");
+        titleLabel.getStyleClass().add("title-label");
         
         Region separator = new Region();
         separator.setPrefHeight(2);
-        separator.setStyle("-fx-background-color: linear-gradient(from 0% 0% to 100% 0%, #667eea 0%, #764ba2 100%); -fx-background-radius: 1px;");
+        separator.getStyleClass().add("title-separator");
         
         titleSection.getChildren().addAll(titleLabel, separator);
         
@@ -39,16 +38,7 @@ public class ConsolePanel extends VBox {
         consoleArea = new TextArea();
         consoleArea.setEditable(false);
         consoleArea.setWrapText(true);
-        consoleArea.setStyle(
-            "-fx-background-color: #f7fafc; " +
-            "-fx-text-fill: #2d3748; " +
-            "-fx-font-family: 'Consolas', 'Monaco', monospace; " +
-            "-fx-font-size: 12px; " +
-            "-fx-background-radius: 6px; " +
-            "-fx-border-color: transparent; " +
-            "-fx-border-radius: 6px; " +
-            "-fx-padding: 8px;"
-        );
+        consoleArea.getStyleClass().add("console-area");
         
         consoleArea.setPromptText("等待操作...");
         
