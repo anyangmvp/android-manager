@@ -37,6 +37,7 @@ public class ScreenMirrorPanel extends VBox {
     
     private Process scrcpyProcess;
     private ScheduledExecutorService executorService;
+    private volatile boolean isStarting = false;
     
     public ScreenMirrorPanel(DeviceManager deviceManager, AdbManager adbManager, ConsolePanel consolePanel) {
         this.deviceManager = deviceManager;
@@ -47,10 +48,8 @@ public class ScreenMirrorPanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("screen-mirror-panel");
-        setPadding(new Insets(15));
-        
-        Label titleLabel = new Label("屏幕投射控制");
-        titleLabel.getStyleClass().add("title-label");
+        setPadding(new Insets(10));
+        setSpacing(8);
         
         VBox settingsBox = createSettingsSection();
         
@@ -61,7 +60,7 @@ public class ScreenMirrorPanel extends VBox {
         statusLabel = new Label("未连接");
         statusLabel.getStyleClass().add("status-label");
         
-        getChildren().addAll(titleLabel, settingsBox, optionsBox, buttonBox, statusLabel);
+        getChildren().addAll(settingsBox, optionsBox, buttonBox, statusLabel);
     }
     
     private VBox createSettingsSection() {
@@ -153,6 +152,12 @@ public class ScreenMirrorPanel extends VBox {
     }
     
     private void startMirror() {
+        // 防止重复启动
+        if (isStarting) {
+            consolePanel.appendLog("[屏幕投射] 正在启动中，请稍候...");
+            return;
+        }
+        
         DeviceInfo selectedDevice = deviceManager.getSelectedDevice();
         if (selectedDevice == null) {
             showError("请先选择设备");
@@ -164,6 +169,9 @@ public class ScreenMirrorPanel extends VBox {
             showError("scrcpy 未安装，请先安装 scrcpy\n下载地址: https://github.com/Genymobile/scrcpy");
             return;
         }
+        
+        isStarting = true;
+        startMirrorButton.setDisable(true);
         
         consolePanel.appendLog("[屏幕投射] 正在启动 scrcpy...");
         statusLabel.setText("正在连接...");
@@ -211,12 +219,13 @@ public class ScreenMirrorPanel extends VBox {
                 }
             }, 1, 1, TimeUnit.SECONDS);
             
-            startMirrorButton.setDisable(true);
             stopMirrorButton.setDisable(false);
             statusLabel.setText("投射中: " + deviceId);
             consolePanel.appendLog("[屏幕投射] 已启动，设备: " + deviceId);
             
         } catch (IOException e) {
+            isStarting = false;
+            startMirrorButton.setDisable(false);
             showError("启动失败: " + e.getMessage());
             consolePanel.appendLog("[屏幕投射] 启动失败: " + e.getMessage());
         }
@@ -233,6 +242,7 @@ public class ScreenMirrorPanel extends VBox {
             executorService = null;
         }
         
+        isStarting = false;
         startMirrorButton.setDisable(false);
         stopMirrorButton.setDisable(true);
         statusLabel.setText("未连接");

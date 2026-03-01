@@ -191,7 +191,7 @@
 .tab-pane .tab .tab-label {
     -fx-text-fill: #4a5568;
     -fx-font-weight: bold;
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
 }
 
 .tab-pane .tab:selected .tab-label {

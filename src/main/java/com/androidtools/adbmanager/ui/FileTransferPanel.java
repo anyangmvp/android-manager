@@ -69,20 +69,17 @@ public class FileTransferPanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("file-transfer-panel");
-        setPadding(new Insets(15));
-        
-        Label titleLabel = new Label("文件管理");
-        titleLabel.getStyleClass().add("title-label");
+        setPadding(new Insets(10));
+        setSpacing(8);
         
         HBox filterBox = createFilterRow();
         HBox contentArea = createContentArea();
-        
         HBox buttonBox = createButtonSection();
         
         statusLabel = new Label("就绪");
         statusLabel.getStyleClass().add("status-label");
         
-        getChildren().addAll(titleLabel, filterBox, contentArea, buttonBox, statusLabel);
+        getChildren().addAll(filterBox, contentArea, buttonBox, statusLabel);
         
         loadSavedPcDir();
     }

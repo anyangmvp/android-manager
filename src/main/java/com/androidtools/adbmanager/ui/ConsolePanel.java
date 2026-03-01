@@ -21,10 +21,11 @@ public class ConsolePanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("console-panel");
-        setPadding(new Insets(15));
+        setPadding(new Insets(10));
+        setSpacing(8);
         
         // 标题区域
-        VBox titleSection = new VBox(6);
+        VBox titleSection = new VBox(4);
         Label titleLabel = new Label("控制台输出");
         titleLabel.getStyleClass().add("title-label");
         

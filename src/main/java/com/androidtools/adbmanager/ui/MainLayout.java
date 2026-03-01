@@ -72,7 +72,7 @@ public class MainLayout extends BorderPane {
      */
     private HBox createCenterContent() {
         HBox content = new HBox(15);
-        content.setPadding(new Insets(20));
+        content.setPadding(new Insets(15));
         
         // 左侧面板（设备管理）
         devicePanel = new DevicePanel(deviceManager);
@@ -84,6 +84,8 @@ public class MainLayout extends BorderPane {
         
         // 先创建控制台面板（这样其他面板可以使用它）
         consolePanel = new ConsolePanel();
+        consolePanel.setMinHeight(120);
+        consolePanel.setPrefHeight(150);
         VBox.setVgrow(consolePanel, Priority.ALWAYS);
         
         // 功能选项卡
@@ -105,17 +107,17 @@ public class MainLayout extends BorderPane {
         Tab screenshotTab = new Tab("截屏功能", screenshotPanel);
         screenshotTab.setClosable(false);
         
-        // 屏幕投射标签页
-        screenMirrorPanel = new ScreenMirrorPanel(deviceManager, adbManager, consolePanel);
-        Tab mirrorTab = new Tab("屏幕投射", screenMirrorPanel);
-        mirrorTab.setClosable(false);
+        // 屏幕投射标签页（暂时禁用）
+        // screenMirrorPanel = new ScreenMirrorPanel(deviceManager, adbManager, consolePanel);
+        // Tab mirrorTab = new Tab("屏幕投射", screenMirrorPanel);
+        // mirrorTab.setClosable(false);
         
         // 文件管理标签页
         fileTransferPanel = new FileTransferPanel(deviceManager, adbManager, consolePanel);
         Tab fileTab = new Tab("文件管理", fileTransferPanel);
         fileTab.setClosable(false);
         
-        tabPane.getTabs().addAll(gradleTab, apkTab, screenshotTab, mirrorTab, fileTab);
+        tabPane.getTabs().addAll(gradleTab, apkTab, screenshotTab, fileTab);
         
         functionArea.getChildren().addAll(tabPane, consolePanel);
         

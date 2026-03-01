@@ -47,10 +47,7 @@ public class ScreenshotPanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("screenshot-panel");
-        
-        // 标题
-        Label titleLabel = new Label("截屏功能");
-        titleLabel.getStyleClass().add("title-label");
+        setSpacing(8);
         
         // 输出目录设置
         VBox dirBox = createDirSection();
@@ -68,7 +65,7 @@ public class ScreenshotPanel extends VBox {
         statusLabel = new Label("就绪");
         statusLabel.getStyleClass().add("status-label");
         
-        getChildren().addAll(titleLabel, dirBox, nameBox, screenshotButton, statusLabel);
+        getChildren().addAll(dirBox, nameBox, screenshotButton, statusLabel);
     }
     
     private VBox createDirSection() {

@@ -114,10 +114,7 @@ public class GradlePanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("gradle-panel");
-        
-        // 标题
-        Label titleLabel = new Label("Gradle 构建");
-        titleLabel.getStyleClass().add("title-label");
+        setSpacing(8);
         
         // 项目目录选择
         HBox dirBox = new HBox(10);
@@ -237,7 +234,7 @@ public class GradlePanel extends VBox {
             statusLabel.getStyleClass().add("status-label");
         }
         
-        getChildren().addAll(titleLabel, dirBox, buttonGrid, statusLabel);
+        getChildren().addAll(dirBox, buttonGrid, statusLabel);
     }
     
     /**

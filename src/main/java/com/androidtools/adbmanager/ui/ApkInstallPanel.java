@@ -52,10 +52,7 @@ public class ApkInstallPanel extends VBox {
     
     private void buildUI() {
         getStyleClass().add("apk-install-panel");
-        
-        // 标题
-        Label titleLabel = new Label("APK 安装");
-        titleLabel.getStyleClass().add("title-label");
+        setSpacing(8);
         
         // 从 Gradle 项目选择 APK
         VBox projectApkBox = createProjectApkSection();
@@ -67,7 +64,7 @@ public class ApkInstallPanel extends VBox {
         statusLabel = new Label("就绪");
         statusLabel.getStyleClass().add("status-label");
         
-        getChildren().addAll(titleLabel, projectApkBox, new Separator(), directApkBox, statusLabel);
+        getChildren().addAll(projectApkBox, new Separator(), directApkBox, statusLabel);
     }
     
     private VBox createProjectApkSection() {
